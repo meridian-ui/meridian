@@ -82,7 +82,7 @@ function resolveInternalAttributes(internalAttrs: any, item: any): any {
  * - A filter operation (t.filter) that filters an array based on a condition string or AttributeConditionType.
  * - A slice operation (t.slice) that extracts a subset of an array using start and end indices.
  */
-function applyTransform(value: any, transforms: AttributeTransformType[], item: any, parentId?: string): any {
+export function applyTransform(value: any, transforms: AttributeTransformType[], item: any, parentId?: string): any {
   let transformed = value;
   transforms.forEach(t => {
     if (t.value) {
@@ -165,7 +165,7 @@ function applyTransform(value: any, transforms: AttributeTransformType[], item: 
  * A very basic filter evaluator.
  * WARNING: For a production system, use a safe evaluation method.
  */
-function evalFilter(filterExpr: string, datum: any): boolean {
+export function evalFilter(filterExpr: string, datum: any): boolean {
   try {
     // `datum` is passed in as a parameter to the function.
     return Function("datum", `return ${filterExpr}`)(datum);
@@ -183,7 +183,7 @@ function evalFilter(filterExpr: string, datum: any): boolean {
 /**
  * Evaluates an AttributeConditionType against an item.
  */
-function evaluateCondition(item: any, condition: AttributeConditionType): boolean {
+export function evaluateCondition(item: any, condition: AttributeConditionType): boolean {
   // Check an "exists" condition.
   if (condition.exists) {
     const existsValue = resolveValue(item, condition.exists);
@@ -236,7 +236,7 @@ function evaluateCondition(item: any, condition: AttributeConditionType): boolea
  * Maps an array of AttributeType to an array of FetchedAttributeType.
  * This function handles both value attributes and groups (nested attributes).
  */
-function mapAttributes(item: any, itemIndex: number, attributes: AttributeType[], parentId?: string): FetchedAttributeType[] {
+export function mapAttributes(item: any, itemIndex: number, attributes: AttributeType[], parentId?: string): FetchedAttributeType[] {
   const mapped: FetchedAttributeType[] = [];
   attributes.forEach((attr, attrIndex) => {
     // If a condition is defined and fails, skip this attribute.
