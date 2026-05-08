@@ -18,12 +18,12 @@ export interface OverviewBasicMapType extends OverviewConfig {
   // positions: { lat: number; lng: number }[];
   // googleMapsAPIKey: string | undefined;
   // itemType: ''
-  details: [
-    {
-      type: "basic";
-      openFrom: ["item"];
-    }
-  ];
+  // details: [
+  //   {
+  //     type: "basic";
+  //     openFrom: ["item"];
+  //   }
+  // ];
 }
 
 export const basicMapDefault: Partial<OverviewBasicMapType> = {
@@ -90,8 +90,8 @@ export const OverviewBasicMap = (options: ViewOptions) => {
   const [hoveredItemId, setHoveredItemId] = useState("");
 
   const coordinates = getCoords(odi?.dataBinding[0].items ?? []);
-  const googleMapsAPIKey = options.overview.googleMapsAPIKey;
-  const googleMapsAPIId = options.overview.googleMapsAPIId;
+  const googleMapsAPIKey = mapOverview.googleMapsAPIKey;
+  const googleMapsAPIId = mapOverview.googleMapsAPIId;
 
   // console.log(coordinates, googleMapsAPIKey);
 
@@ -329,7 +329,7 @@ const calculateMapBounds = (positions: (Position | undefined)[]): MapBounds => {
   const lngDistance = bounds.east - bounds.west;
 
   // Reduce padding to allow for closer zoom
-  const padding = 0.2; // Reduced from 0.5
+  const padding = 2; // Reduced from 0.5
   const paddedLatDistance = latDistance + padding;
   const paddedLngDistance = lngDistance + padding;
 
