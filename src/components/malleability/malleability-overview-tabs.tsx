@@ -23,6 +23,9 @@ export const MalleabilityOvervewTabs = () => {
     highlightAttributes,
     setHighlightAttributes,
     enabledMalleableContent,
+    enabledMalleableComposition,
+    enabledMalleableLayout,
+    malleableCompositionSetting
   } = useODI();
 
   const [hoveredOverview, setHoveredOverview] = useState<string | null>(null);
@@ -223,7 +226,7 @@ export const MalleabilityOvervewTabs = () => {
         </div> */}
         <div className={`overview-tabs overview-${viewMode}`}>
           <div className="toolbar-content">
-            {odi?.overviews.map((overview, index) => (
+            {malleableCompositionSetting().includes('tabs') && odi?.overviews.map((overview, index) => (
               <div
                 key={`${overview.id}-${index}`}
                 className={`overview-tab toolbar-item ${activeOverview === overview.id
@@ -239,7 +242,7 @@ export const MalleabilityOvervewTabs = () => {
                 }}
               >
                 <span className="">{toTitleCase(overview.type)}</span>
-                {odi.overviews.length > 1 ? (
+                {odi.overviews.length > 1 && enabledMalleableComposition() ? (
                   <button
                     className="overview-tab-delete-button"
                     onClick={(e) => {
@@ -266,7 +269,7 @@ export const MalleabilityOvervewTabs = () => {
                   <div className="w-[4px]" />
                 )}
                 {/* Hover dropdown showing all available overview types (Figma-style) */}
-                {hoveredOverview === overview.id && (
+                {hoveredOverview === overview.id && enabledMalleableLayout() && (
                   <div className="overview-hover-dropdown">
                     <div className="dropdown-section">
                       <div className="dropdown-section-label">Default Layouts</div>
@@ -353,6 +356,7 @@ export const MalleabilityOvervewTabs = () => {
                 )}
               </div>
             ))}
+            {malleableCompositionSetting().includes("tabs") && (
             <div className="toolbar-item">
               <button
                 onClick={() => addNewOverview()}
@@ -381,6 +385,8 @@ export const MalleabilityOvervewTabs = () => {
                 </svg>
               </button>
             </div>
+            )}
+            {malleableCompositionSetting().includes("toolbar") && (
             <div className="toolbar-item" id="overviewLayouts" ref={overviewLayoutsDropdownRef}>
               <button
                 className="toolbar-btn"
@@ -484,6 +490,7 @@ export const MalleabilityOvervewTabs = () => {
                 </div>
               )}
             </div>
+            )}
             {enabledMalleableContent() &&
               !odi?.malleability?.content?.disabled &&
               odi?.malleability?.content?.types?.includes("toggle") && (
@@ -512,7 +519,8 @@ export const MalleabilityOvervewTabs = () => {
                     <span>{highlightAttributes ? "Customizing" : "Customize Content"}</span>
                   </button>
                 </div>
-              )}
+            )}
+            {enabledMalleableLayout() && (
             <div className="toolbar-item">
               <button
                 className="toolbar-btn more-settings-button"
@@ -531,6 +539,7 @@ export const MalleabilityOvervewTabs = () => {
                 <span>Meridian UI Settings</span>
               </button>
             </div>
+            )}
           </div>
         </div>
       </div>

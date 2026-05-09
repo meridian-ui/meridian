@@ -243,7 +243,11 @@ function mapAttributes(item: any, itemIndex: number, attributes: AttributeType[]
     if (attr.condition && !evaluateCondition(item, attr.condition)) {
       return;
     }
-    const id = attr.type === "overview" ? attr.id??"" : (parentId && parentId !== "undefined") ? `${parentId}-${attrIndex}` : `${attrIndex}`;
+    const id = attr.type === "overview" 
+      ? attr.id??"" 
+      : attr.id 
+        ? attr.id : (parentId && parentId !== "undefined") 
+          ? `${parentId}-${attrIndex}` : `${attrIndex}`;
 
     // If there are nested attributes, treat this as a group.
     if (attr.attributes && attr.attributes.length > 0) {

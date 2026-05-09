@@ -31,7 +31,7 @@ export const OverviewBasicTable = (options: ViewOptions) => {
   const headerInfo = sampleItem?.attributes
     .filter((attr) => attr !== null && attr !== undefined) // Filter out hidden attributes
     .map((attr) => {
-      const role = attr?.roles?.at(0) ?? "Attribute";
+      const role = attr?.id ?? "Attribute";
       // Get label if available (for regular attributes)
       const label = isAttributeType(attr) ? attr?.label : undefined;
       return {

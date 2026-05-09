@@ -149,11 +149,11 @@ export const MeridianOverview = ({
   return (
     <div>
       <div className="flex flex-col">
-        {malleableCompositionSetting().includes("tabs") && (
+        {(malleableCompositionSetting().includes("tabs") || malleableCompositionSetting().includes("toolbar")) && (
           <MalleabilityOvervewTabs />
         )}
         {/* Only show toggle when tabs are not enabled (it's in the toolbar when tabs are enabled) */}
-        {enabledMalleableContent() && !malleableCompositionSetting().includes("tabs") && <MalleabilityAttributesToggle />}
+        {enabledMalleableContent() && !malleableCompositionSetting().includes("tabs") && !malleableCompositionSetting().includes("toolbar") && <MalleabilityAttributesToggle />}
       </div>
       {odi.overviews
         .filter(

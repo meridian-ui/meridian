@@ -109,7 +109,7 @@ export const OverviewBasicMap = (options: ViewOptions) => {
 
   return (
     <div
-      className={`w-full h-full flex flex-col items-center py-8 px-4 ${options.overview.className ?? ''}`}
+      className={`w-full h-full flex flex-col items-center py-8 px-8 ${options.overview.className ?? ''}`}
       style={options.overview.style}
     >
       {/* <div className="flex flex-row flex-wrap gap-4">
@@ -125,7 +125,7 @@ export const OverviewBasicMap = (options: ViewOptions) => {
         ))}
       </div> */}
       {/* api: {mapOverview.googleMapsAPIKey} */}
-      <div className="w-full h-[90vh]">
+      <div className="w-full h-[100vh] overflow-hidden rounded-3xl">
         <APIProvider apiKey={googleMapsAPIKey ?? ""}>
           <Map
             key={"map" + mapOverview.id}
@@ -310,18 +310,23 @@ const calculateMapBounds = (positions: (Position | undefined)[]): MapBounds => {
     west: 180,
   };
 
+  let avgLat: number = 0;
+  let avgLng: number = 0;
+
   // Calculate the bounds that contain all markers
   positionsFiltered.forEach((position) => {
     bounds.north = Math.max(bounds.north, position.lat);
     bounds.south = Math.min(bounds.south, position.lat);
     bounds.east = Math.max(bounds.east, position.lng);
     bounds.west = Math.min(bounds.west, position.lng);
+    avgLat += position.lat;
+    avgLng += position.lng;
   });
 
   // Calculate center
   const defaultCenter: Position = {
-    lat: (bounds.north + bounds.south) / 2,
-    lng: (bounds.east + bounds.west) / 2,
+    lat: avgLat/positionsFiltered.length,
+    lng: avgLng/positionsFiltered.length
   };
 
   // Calculate zoom based on the size of the bounding box
@@ -329,7 +334,7 @@ const calculateMapBounds = (positions: (Position | undefined)[]): MapBounds => {
   const lngDistance = bounds.east - bounds.west;
 
   // Reduce padding to allow for closer zoom
-  const padding = 2; // Reduced from 0.5
+  const padding = 0; // Reduced from 0.5
   const paddedLatDistance = latDistance + padding;
   const paddedLngDistance = lngDistance + padding;
 
