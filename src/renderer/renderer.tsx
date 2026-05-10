@@ -274,7 +274,7 @@ export const MeridianItem = ({
         selectedItemEntity?.itemId === item.itemId &&
         selectedItemEntity?.detail.openIn === "tooltip" && (
           <div
-            className="absolute w-[400px] h-fit max-h-[500px] bg-white shadow-2xl h-[96%] rounded-md z-10 overflow-scroll"
+            className="absolute w-100 max-h-125 bg-white shadow-2xl h-[96%] rounded-md z-10 overflow-scroll"
             style={{
               left: "calc(50% - 200px)",
               top: -520,

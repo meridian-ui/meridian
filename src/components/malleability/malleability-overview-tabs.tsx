@@ -266,7 +266,7 @@ export const MalleabilityOvervewTabs = () => {
                     </svg>
                   </button>
                 ) : (
-                  <div className="w-[4px]" />
+                  <div className="w-1" />
                 )}
                 {/* Hover dropdown showing all available overview types (Figma-style) */}
                 {hoveredOverview === overview.id && enabledMalleableLayout() && (
