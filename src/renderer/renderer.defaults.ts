@@ -179,7 +179,7 @@ export const defaultMalleability: Malleability = {
   },
   composition: {
     disabled: false,
-    types: ["tabs"],
+    types: ["tabs", "toolbar"],
   },
   layout: {
     disabled: false,
@@ -189,6 +189,6 @@ export const defaultMalleability: Malleability = {
 
 export const defaultMalleabilityDimension = {
   content: ["toggle"],
-  composition: ["tabs"],
+  composition: ["tabs", "toolbar"],
   layout: ["menus"],
 };

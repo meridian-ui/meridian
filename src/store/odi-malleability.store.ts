@@ -14,7 +14,7 @@ export interface ODIMalleabilityStore {
 
   malleabilityConsoleOpen: boolean;
   setMalleabilityConsoleOpen: (open: boolean) => void;
-
+  enabledMalleability: () => boolean;
   enabledMalleableContent: () => boolean;
   enabledMalleableComposition: () => boolean;
   enabledMalleableLayout: () => boolean;
@@ -142,6 +142,14 @@ export const createODIMalleabilityStore = (set: ZustandSet, get: ZustandGet): OD
 
   malleabilityConsoleOpen: false,
   setMalleabilityConsoleOpen: (open) => set({ malleabilityConsoleOpen: open }),
+
+  enabledMalleability: () => {
+    const { odi } = get();
+    if (odi?.malleability?.disabled) return false;
+    return !odi?.malleability?.content?.disabled ||
+    !odi?.malleability?.composition?.disabled ||
+    !odi?.malleability?.layout?.disabled;
+  },
 
   enabledMalleableContent: () => {
     const { odi } = get();

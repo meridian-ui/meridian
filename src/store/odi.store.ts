@@ -81,9 +81,6 @@ export const useODI = create<ODIStore>((set, get) => {
           originalOdi: fetchedODI
         });
         
-        const { setActiveOverview } = get();
-        setActiveOverview(fetchedODI?.overviews[0]?.id ?? "");
-        
         if (navigationHandlers) {
           const { setOnOpenNewPage } = get();
           setOnOpenNewPage(navigationHandlers);
