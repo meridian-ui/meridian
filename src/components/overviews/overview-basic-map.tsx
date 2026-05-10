@@ -125,7 +125,7 @@ export const OverviewBasicMap = (options: ViewOptions) => {
         ))}
       </div> */}
       {/* api: {mapOverview.googleMapsAPIKey} */}
-      <div className="w-full h-[100vh] overflow-hidden rounded-3xl">
+      <div className="w-full h-screen overflow-hidden rounded-3xl">
         <APIProvider apiKey={googleMapsAPIKey ?? ""}>
           <Map
             key={"map" + mapOverview.id}
@@ -164,7 +164,7 @@ export const OverviewBasicMap = (options: ViewOptions) => {
                     zIndex={hoveredItemId === item?.itemId ? 6 : 3}
                   >
                     <div
-                      className={`w-[fit-content] max-w-[500px] bg-white border border-gray-400 rounded-2xl shadow-md shadow-black/40
+                      className={`w-fit max-w-125 bg-white border border-gray-400 rounded-2xl shadow-md shadow-black/40
                       transition ${
                         detailToOpen && !highlightAttributes
                           ? "hover:scale-[1.12] active:scale-[1]"
